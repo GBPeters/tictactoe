@@ -23,13 +23,23 @@ assert not board.placeStone(1,2,1)
 board.show()
 
 board = Board(3, testM)
-turns = createPossibleTurns(board, 1)
+turns = createPossibleMoves(board, 1)
 for t in turns:
     print t
     
 board = Board(3)
-turns = createPossibleTurns(board, 1)
-for t in turns:
-    print t
+# turns = createPossibleMoves(board, 1)
+# for t in turns:
+#     print t
 
 #playshellgame()
+testsize=4
+
+for i in range(testsize / 2 + 1):
+    for j in range(i+1):
+        game = Game(size=testsize)
+        outcome = game.playTurn(i, j)
+        while outcome == 0:
+            move = findBestMove(game.getBoard(), game.getTurnPlayer(), maxrecursion=4)
+            outcome = game.playTurn(move.row, move.column)
+        raw_input("Ready for the next game?")
